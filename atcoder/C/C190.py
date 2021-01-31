@@ -1,17 +1,16 @@
+N,M=map(int,input().split())
+AB=[tuple(map(int,input().split())) for _ in range(M)]
+K=int(input())
+CD=[tuple(map(int,input().split())) for __ in range(K)]
+
 import itertools
-N, M = map(int, input().split())
-cond = [tuple(map(int, input().split())) for i in range(M)]
-K = int(input())
-choice = [tuple(map(int, input().split())) for i in range(K)]
-ans = 0
+count=0
+counts=[]
 
-
-print(*choice)
-print(itertools.product(*choice))
-
-for balls in itertools.product(*choice):
-    balls = set(balls)
-    cnt = sum(A in balls and B in balls for A, B in cond)
-    if ans < cnt:
-        ans = cnt
-print(ans)
+for ball in itertools.product(*CD,repeat=1):
+    for i,j in AB:
+        if i in ball and j in ball:
+            count+=1
+    counts.append(count)
+    count=0
+print(max(counts))
